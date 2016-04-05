@@ -1,6 +1,0 @@
-framework module Pods_UAP {
-  umbrella header "Pods-UAP-umbrella.h"
-
-  export *
-  module * { export * }
-}
