@@ -171,10 +171,20 @@ class MusicPlayerController: UIViewController {
     func updateScrubSlider(){
         scrubOutlet.value = Float(av_plyr.currentTime/av_plyr.duration)
         
-        if scrubOutlet.value == 1 || scrubOutlet.value == 0 {
+        print(scrubOutlet.value)
+        
+        if scrubOutlet.value >= 0.99 {
             
-            origImg_play = UIImage(named: "Pause Filled")!
-            mediaControls_init()
+            songNum = (songNum + 1)%3
+            //print(songNum)
+            
+            if av_plyr.playing == false {
+                avPlyr_init()
+                av_plyr.pause()
+            } else if av_plyr.playing == true {
+                avPlyr_init()
+                av_plyr.play()
+            }
             
         }
     }
