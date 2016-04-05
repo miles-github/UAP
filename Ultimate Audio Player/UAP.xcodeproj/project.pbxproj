@@ -12,6 +12,7 @@
 		34B6EB601CB37C4D00213BAF /* Battle at the misty valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */; };
 		34B6EB611CB37C4D00213BAF /* Twilight Poem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */; };
 		34B6EB631CB37CD800213BAF /* Classical-bwv-bach.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */; };
+		55F9F5A31CB4298A0008E859 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9F5A21CB4298A0008E859 /* AudioPlayer.swift */; };
 		7E6E49475C073EBE54336847 /* Pods_UAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E0C704EFFD633F704DBA08 /* Pods_UAPUITests.framework */; };
 		EF117C601CB33C2F0020B156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF117C5F1CB33C2F0020B156 /* AppDelegate.swift */; };
 		EF117C651CB33C2F0020B156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF117C631CB33C2F0020B156 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Battle at the misty valley.mp3"; sourceTree = "<group>"; };
 		34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Twilight Poem.mp3"; sourceTree = "<group>"; };
 		34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Classical-bwv-bach.mp3"; sourceTree = "<group>"; };
+		55F9F5A21CB4298A0008E859 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		690EE7E09B32C649F9D80E54 /* Pods_UAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E0C704EFFD633F704DBA08 /* Pods_UAPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9059D1A385A8DC98044F8642 /* Pods_UAPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55F9F59C1CB3E0790008E859 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				34B6EB5A1CB3630600213BAF /* MusicPlayerController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		55F9F59D1CB3E0820008E859 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EF117C631CB33C2F0020B156 /* Main.storyboard */,
+				EF117C681CB33C2F0020B156 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		55F9F59E1CB3E0880008E859 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55F9F5A21CB4298A0008E859 /* AudioPlayer.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		55F9F59F1CB3E0C00008E859 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */,
+				34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */,
+				34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */,
+			);
+			name = "Audio Files";
+			sourceTree = "<group>";
+		};
 		63EB84EC6A248D7446C02377 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,14 +180,12 @@
 		EF117C5E1CB33C2F0020B156 /* UAP */ = {
 			isa = PBXGroup;
 			children = (
-				34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */,
-				34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */,
-				34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */,
 				EF117C5F1CB33C2F0020B156 /* AppDelegate.swift */,
-				34B6EB5A1CB3630600213BAF /* MusicPlayerController.swift */,
-				EF117C631CB33C2F0020B156 /* Main.storyboard */,
+				55F9F59E1CB3E0880008E859 /* Model */,
+				55F9F59D1CB3E0820008E859 /* View */,
+				55F9F59C1CB3E0790008E859 /* Controller */,
+				55F9F59F1CB3E0C00008E859 /* Audio Files */,
 				EF117C661CB33C2F0020B156 /* Assets.xcassets */,
-				EF117C681CB33C2F0020B156 /* LaunchScreen.storyboard */,
 				EF117C6B1CB33C2F0020B156 /* Info.plist */,
 			);
 			path = UAP;
@@ -441,6 +476,7 @@
 			files = (
 				34B6EB5B1CB3630600213BAF /* MusicPlayerController.swift in Sources */,
 				EF117C601CB33C2F0020B156 /* AppDelegate.swift in Sources */,
+				55F9F5A31CB4298A0008E859 /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

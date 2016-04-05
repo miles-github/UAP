@@ -11,27 +11,51 @@ import AVFoundation
 
 class MusicPlayerController: UIViewController {
 
-    var av_plyr: AVAudioPlayer = AVAudioPlayer()
+    var audioPlayer = AudioPlayer()
     
     var origImg_play = UIImage(named: "Play Filled")!
     
-    var songs_test = ["Battle at the misty valley", "Twilight Poem", "Classical-bwv-bach"]
-    
-    var songNum = 0
+    var testSongArray = ["Battle at the misty valley", "Twilight Poem", "Classical-bwv-bach"]
     
     //Temporary Scrubber and Volume Control
     @IBOutlet var volumeOutlet: UISlider!
     @IBOutlet var scrubOutlet: UISlider!
      
     @IBAction func volumeAction(sender: AnyObject) {
-     av_plyr.volume = volumeOutlet.value
+     audioPlayer.volume = volumeOutlet.value
      }
     @IBAction func scrubAction(sender: AnyObject) {
-        av_plyr.currentTime = Double(scrubOutlet.value) * av_plyr.duration
+        audioPlayer.player!.currentTime = Double(scrubOutlet.value) * audioPlayer.player!.duration
     }
 
+    // MARK: - View Controller Lifecycle Methods
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.mediaControls_init()
+        /*
+         Further along, we'll want to tweak the way the audio player is fed files. For now, just initializing
+         it with the array of songs specified in the testSongArray
+         */
+        audioPlayer = AudioPlayer(arrayOfMP3FileNames: testSongArray)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Custom Methods
+    
+    // FIXME: Most of this can be done with interface builder and a lot less code.
     private func mediaControls_init() {
+        
+        /*
+         TODO: Ideas:
+         1) Create media controls on the storyboard
+         2) Create IBOutlets on the VC
+         3) Only tweak appearance attributes for the various components programatically
+         */
         
         //Create a container for buttons
         let containerArea = UIView()
@@ -95,17 +119,15 @@ class MusicPlayerController: UIViewController {
     }
     
     func pressedPlay(button: UIButton) {
-        if av_plyr.playing == false {
-            av_plyr.play()
+        if audioPlayer.player!.playing == false {
+            audioPlayer.play()
             
             origImg_play = UIImage(named: "Pause Filled")!
             
-            mediaControls_init()
+            print(audioPlayer.player!.duration)
             
-            print(av_plyr.duration)
-            
-        } else if av_plyr.playing == true {
-            av_plyr.pause()
+        } else if audioPlayer.player!.playing == true {
+            audioPlayer.pause()
             
             origImg_play = UIImage(named: "Play Filled")!
             
@@ -114,34 +136,26 @@ class MusicPlayerController: UIViewController {
     }
     
     func pressedFastf(button: UIButton) {
-        songNum = (songNum + 1)%3
-        //print(songNum)
         
-        if av_plyr.playing == false {
-            avPlyr_init()
-            av_plyr.pause()
-        } else if av_plyr.playing == true {
-            avPlyr_init()
-            av_plyr.play()
+        self.audioPlayer.nextSong(true)
+        
+        if audioPlayer.player!.playing == false {
+            audioPlayer.pause()
+        } else if audioPlayer.player!.playing == true {
+            audioPlayer.play()
         }
         
     }
     
     func pressedRewind(button: UIButton) {
-        if songNum == 0 {
-            songNum = 2
-        } else {
-            songNum = (songNum - 1)%3
-        }
+        audioPlayer.previousSong()
         
         //print(songNum)
         
-        if av_plyr.playing == false {
-            avPlyr_init()
-            av_plyr.pause()
-        } else if av_plyr.playing == true {
-            avPlyr_init()
-            av_plyr.play()
+        if audioPlayer.player!.playing == false {
+            audioPlayer.pause()
+        } else if audioPlayer.player!.playing == true {
+            audioPlayer.play()
         }
     }
     
@@ -149,27 +163,8 @@ class MusicPlayerController: UIViewController {
         print("some action")
     }
     
-    func avPlyr_init() {
-        
-        self.title = songs_test[songNum]
-        
-        //Create a path to the mp3 player
-        let audioPath = NSBundle.mainBundle().pathForResource(songs_test[songNum], ofType: "mp3")!
-        
-        do {
-            try av_plyr = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioPath))
-            
-        } catch {
-            print("error")
-        }
-        
-        
-        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateScrubSlider"), userInfo: nil, repeats: true)
-        
-    }
-    
     func updateScrubSlider(){
-        scrubOutlet.value = Float(av_plyr.currentTime/av_plyr.duration)
+        scrubOutlet.value = Float(audioPlayer.player!.currentTime/audioPlayer.player!.duration)
         
         if scrubOutlet.value == 1 || scrubOutlet.value == 0 {
             
@@ -178,20 +173,4 @@ class MusicPlayerController: UIViewController {
             
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.mediaControls_init()
-        
-        self.avPlyr_init()
-        
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
