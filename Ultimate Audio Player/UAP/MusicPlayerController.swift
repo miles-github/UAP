@@ -171,7 +171,7 @@ class MusicPlayerController: UIViewController {
     func updateScrubSlider(){
         scrubOutlet.value = Float(av_plyr.currentTime/av_plyr.duration)
         
-        print(scrubOutlet.value)
+        //print(scrubOutlet.value)
         
         if scrubOutlet.value >= 0.99 {
             

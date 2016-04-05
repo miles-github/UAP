@@ -12,6 +12,13 @@
 		34B6EB601CB37C4D00213BAF /* Battle at the misty valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */; };
 		34B6EB611CB37C4D00213BAF /* Twilight Poem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */; };
 		34B6EB631CB37CD800213BAF /* Classical-bwv-bach.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */; };
+		34ED93C61CB4157700D0AFD3 /* media_control.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93C51CB4157700D0AFD3 /* media_control.png */; };
+		34ED93C81CB4164200D0AFD3 /* grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93C71CB4164200D0AFD3 /* grey.png */; };
+		34ED93CD1CB4222500D0AFD3 /* High Volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93C91CB4222500D0AFD3 /* High Volume.png */; };
+		34ED93CE1CB4222500D0AFD3 /* Low Volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93CA1CB4222500D0AFD3 /* Low Volume.png */; };
+		34ED93CF1CB4222500D0AFD3 /* Repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93CB1CB4222500D0AFD3 /* Repeat.png */; };
+		34ED93D01CB4222500D0AFD3 /* Shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93CC1CB4222500D0AFD3 /* Shuffle.png */; };
+		34ED93DB1CB459D000D0AFD3 /* album-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 34ED93DA1CB459D000D0AFD3 /* album-placeholder.png */; };
 		7E6E49475C073EBE54336847 /* Pods_UAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E0C704EFFD633F704DBA08 /* Pods_UAPUITests.framework */; };
 		EF117C601CB33C2F0020B156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF117C5F1CB33C2F0020B156 /* AppDelegate.swift */; };
 		EF117C651CB33C2F0020B156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF117C631CB33C2F0020B156 /* Main.storyboard */; };
@@ -47,6 +54,13 @@
 		34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Battle at the misty valley.mp3"; sourceTree = "<group>"; };
 		34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Twilight Poem.mp3"; sourceTree = "<group>"; };
 		34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Classical-bwv-bach.mp3"; sourceTree = "<group>"; };
+		34ED93C51CB4157700D0AFD3 /* media_control.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_control.png; sourceTree = "<group>"; };
+		34ED93C71CB4164200D0AFD3 /* grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey.png; sourceTree = "<group>"; };
+		34ED93C91CB4222500D0AFD3 /* High Volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "High Volume.png"; sourceTree = "<group>"; };
+		34ED93CA1CB4222500D0AFD3 /* Low Volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Low Volume.png"; sourceTree = "<group>"; };
+		34ED93CB1CB4222500D0AFD3 /* Repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Repeat.png; sourceTree = "<group>"; };
+		34ED93CC1CB4222500D0AFD3 /* Shuffle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shuffle.png; sourceTree = "<group>"; };
+		34ED93DA1CB459D000D0AFD3 /* album-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album-placeholder.png"; sourceTree = "<group>"; };
 		690EE7E09B32C649F9D80E54 /* Pods_UAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E0C704EFFD633F704DBA08 /* Pods_UAPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9059D1A385A8DC98044F8642 /* Pods_UAPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,9 +157,16 @@
 		EF117C5E1CB33C2F0020B156 /* UAP */ = {
 			isa = PBXGroup;
 			children = (
+				34ED93C91CB4222500D0AFD3 /* High Volume.png */,
+				34ED93CA1CB4222500D0AFD3 /* Low Volume.png */,
+				34ED93CB1CB4222500D0AFD3 /* Repeat.png */,
+				34ED93CC1CB4222500D0AFD3 /* Shuffle.png */,
 				34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */,
 				34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */,
 				34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */,
+				34ED93C71CB4164200D0AFD3 /* grey.png */,
+				34ED93C51CB4157700D0AFD3 /* media_control.png */,
+				34ED93DA1CB459D000D0AFD3 /* album-placeholder.png */,
 				EF117C5F1CB33C2F0020B156 /* AppDelegate.swift */,
 				34B6EB5A1CB3630600213BAF /* MusicPlayerController.swift */,
 				EF117C631CB33C2F0020B156 /* Main.storyboard */,
@@ -286,12 +307,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34ED93CD1CB4222500D0AFD3 /* High Volume.png in Resources */,
 				34B6EB601CB37C4D00213BAF /* Battle at the misty valley.mp3 in Resources */,
 				EF117C6A1CB33C2F0020B156 /* LaunchScreen.storyboard in Resources */,
+				34ED93CF1CB4222500D0AFD3 /* Repeat.png in Resources */,
+				34ED93CE1CB4222500D0AFD3 /* Low Volume.png in Resources */,
+				34ED93C81CB4164200D0AFD3 /* grey.png in Resources */,
 				34B6EB611CB37C4D00213BAF /* Twilight Poem.mp3 in Resources */,
 				EF117C671CB33C2F0020B156 /* Assets.xcassets in Resources */,
+				34ED93DB1CB459D000D0AFD3 /* album-placeholder.png in Resources */,
 				EF117C651CB33C2F0020B156 /* Main.storyboard in Resources */,
+				34ED93C61CB4157700D0AFD3 /* media_control.png in Resources */,
 				34B6EB631CB37CD800213BAF /* Classical-bwv-bach.mp3 in Resources */,
+				34ED93D01CB4222500D0AFD3 /* Shuffle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,87 @@
             </objects>
             <point key="canvasLocation" x="-265" y="194"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="47O-dn-yJD">
+            <objects>
+                <navigationController id="FlK-5L-zdz" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lum-to-0VY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="geJ-a6-wTv" kind="relationship" relationship="rootViewController" id="Gcv-xG-nTT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cVJ-h1-NQP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="972"/>
+        </scene>
+        <!--Eventually will look like this:-->
+        <scene sceneID="BJJ-mM-FyQ">
+            <objects>
+                <viewController id="geJ-a6-wTv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yda-cg-UaH"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfI-RT-Xdg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h5k-BA-I07">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="media_control.png" translatesAutoresizingMaskIntoConstraints="NO" id="Eh8-vV-Kgh">
+                                <rect key="frame" x="-7" y="668" width="427" height="70"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grey.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ho8-pc-WpB">
+                                <rect key="frame" x="0.0" y="603" width="414" height="67"/>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zBp-24-eu7">
+                                <rect key="frame" x="129" y="622" width="154" height="31"/>
+                            </slider>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grey.png" translatesAutoresizingMaskIntoConstraints="NO" id="HFK-s3-zkd">
+                                <rect key="frame" x="-1" y="64" width="415" height="67"/>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="UYe-2T-jin">
+                                <rect key="frame" x="18" y="72" width="378" height="31"/>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4:15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy8-Tj-OqO">
+                                <rect key="frame" x="361" y="100" width="33" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAc-T7-iFi">
+                                <rect key="frame" x="20" y="100" width="32" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="album-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="X5d-Dg-e7V">
+                                <rect key="frame" x="0.0" y="161" width="414" height="414"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="High Volume.png" translatesAutoresizingMaskIntoConstraints="NO" id="jcC-jW-EEP">
+                                <rect key="frame" x="289" y="625" width="28" height="23"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shuffle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gx0-hh-8RD">
+                                <rect key="frame" x="366" y="625" width="28" height="23"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Repeat.png" translatesAutoresizingMaskIntoConstraints="NO" id="QS6-hj-LlD">
+                                <rect key="frame" x="20" y="625" width="28" height="23"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Low Volume.png" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-sL-Gl3">
+                                <rect key="frame" x="95" y="625" width="28" height="23"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Eventually will look like this:" id="Vbh-ls-c4u"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzh-t5-XWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-265" y="982"/>
+        </scene>
         <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -100,4 +181,13 @@
             <point key="canvasLocation" x="423" y="186"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="High Volume.png" width="52" height="52"/>
+        <image name="Low Volume.png" width="52" height="52"/>
+        <image name="Repeat.png" width="52" height="52"/>
+        <image name="Shuffle.png" width="52" height="52"/>
+        <image name="album-placeholder.png" width="500" height="500"/>
+        <image name="grey.png" width="458" height="64"/>
+        <image name="media_control.png" width="312" height="54"/>
+    </resources>
 </document>
