@@ -73,6 +73,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                 player?.play()
+                NSNotificationCenter.defaultCenter().postNotificationName(playNotificationKey, object: self)
             } catch {
                 print(error)
             }
@@ -83,6 +84,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func stop() {
         if player?.playing == true {
             player?.stop()
+            NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
             player?.currentTime = 0
         }
         print("AudioPlayer stop() called")
@@ -91,6 +93,8 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func pause() {
         if player?.playing == true {
             player?.pause()
+            // FIXME: if we want to pause later, change the notification here and add one on MusicPlayerController
+            NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
         }
         print("AudioPlayer pause() called")
     }

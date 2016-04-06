@@ -9,133 +9,115 @@
 import UIKit
 import AVFoundation
 
+/*
+ This is declared above the class so all the classes can "see" it.
+ */
+let playNotificationKey = "playNotification"
+let stopNotificationKey = "stopNotification"
+
 class MusicPlayerController: UIViewController {
 
     var audioPlayer = AudioPlayer()
     
-    var origImg_play = UIImage(named: "Play Filled")!
-    
     var testSongArray = ["Battle at the misty valley", "Twilight Poem", "Classical-bwv-bach"]
     
-    //Temporary Scrubber and Volume Control
+    /*
+     You cannot set the background of a UIStackView, so the audioControlsStackView is embedded within a blank view called audioControlsContainer. The UIView class can have a backgroundColor, while a UIStackView cannot.
+     */
+    
+    // Media Controls background view
+    @IBOutlet weak var audioControlsContainer: UIView!
+    @IBOutlet weak var audioControlsStackView: UIStackView! // this is tucked in the audioControlsContainer view
+    
+    // Temporary Scrubber and Volume Control
     @IBOutlet var volumeOutlet: UISlider!
     @IBOutlet var scrubOutlet: UISlider!
-     
-    @IBAction func volumeAction(sender: AnyObject) {
-     audioPlayer.volume = volumeOutlet.value
-     }
-    @IBAction func scrubAction(sender: AnyObject) {
-        audioPlayer.player!.currentTime = Double(scrubOutlet.value) * audioPlayer.player!.duration
-    }
-
+    
+    // Player Controls
+    @IBOutlet weak var rewindButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var fastForwardButton: UIButton!
+    
     // MARK: - View Controller Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mediaControls_init()
         /*
-         Further along, we'll want to tweak the way the audio player is fed files. For now, just initializing
-         it with the array of songs specified in the testSongArray
+         Further along, we'll want to tweak the way the audio player is fed files. For now, just initializing it with the array of songs specified in the testSongArray
          */
         audioPlayer = AudioPlayer(arrayOfMP3FileNames: testSongArray)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Custom Methods
-    
-    // FIXME: Most of this can be done with interface builder and a lot less code.
-    private func mediaControls_init() {
+        
+        configureColors()
         
         /*
-         TODO: Ideas:
-         1) Create media controls on the storyboard
-         2) Create IBOutlets on the VC
-         3) Only tweak appearance attributes for the various components programatically
+         AudioPlayerClass posts notifications when it's playing/stopped. The observers below will listen for those notifications nad update the image on the button apropriately.
          */
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(updatePlayButtonImage()), name: playNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(updatePlayButtonImage()), name: stopNotificationKey, object: nil)
+    }
+    
+    deinit {
+        // Remove notifications
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - UI Appearance Attribute Configuration
+    
+    func configureColors() {
+        audioControlsContainer.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+        audioControlsContainer.layer.borderWidth = 2
+        audioControlsContainer.layer.cornerRadius = 10.0
+        audioControlsContainer.layer.borderColor = UIColor.lightGrayColor().CGColor
         
-        //Create a container for buttons
-        let containerArea = UIView()
-        containerArea.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-        containerArea.layer.borderWidth = 2
-        containerArea.layer.borderColor = UIColor.lightGrayColor().CGColor
-        containerArea.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(containerArea)
+        //Tint buttons
+        /*
+         These buttons are PDF vectors, so I specified "render as template image" on Assets.xcassets
+         */
+        let mediaPlayerButtons = [rewindButton,playButton,fastForwardButton]
         
-        //Add Rewind, Play, Fast Forward
-        let origImg_rewind = UIImage(named: "Rewind Filled")!
-        let tintedImg_rewind = origImg_rewind.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let rewindButton = UIButton()
-        
-        let tintedImg_play = origImg_play.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let playButton = UIButton()
-        
-        let origImg_fastf = UIImage(named: "Fast Forward Filled")!
-        let tintedImg_fastf = origImg_fastf.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let fastfButton = UIButton()
-        
-        //Set button specifications
-        let tinted_dict = [rewindButton: tintedImg_rewind, playButton: tintedImg_play, fastfButton: tintedImg_fastf]
-        
-        let button_ls = [rewindButton,playButton,fastfButton]
-        
-        for button in button_ls {
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setContentHuggingPriority(251, forAxis: .Horizontal)
-            button.setContentCompressionResistancePriority(751, forAxis: .Horizontal)
-            button.setImage(tinted_dict[button], forState: .Normal)
+        for button in mediaPlayerButtons {
             button.tintColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
         }
-        
-        //Set button actions and add to subviews
-        rewindButton.addTarget(self, action: Selector("pressedRewind:"), forControlEvents: .TouchUpInside)
-        playButton.addTarget(self, action: Selector("pressedPlay:"), forControlEvents: .TouchUpInside)
-        fastfButton.addTarget(self, action: Selector("pressedFastf:"), forControlEvents: .TouchUpInside)
-        
-        containerArea.addSubview(playButton)
-        containerArea.addSubview(rewindButton)
-        containerArea.addSubview(fastfButton)
-        
-        //Add button constraints
-        let containerAreaConstraints: [NSLayoutConstraint] = [
-            containerArea.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
-            containerArea.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            containerArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
-            containerArea.heightAnchor.constraintEqualToConstant(70),
-            
-            rewindButton.trailingAnchor.constraintEqualToAnchor(playButton.leadingAnchor, constant: -30),
-            playButton.centerXAnchor.constraintEqualToAnchor(containerArea.centerXAnchor),
-            fastfButton.leadingAnchor.constraintEqualToAnchor(playButton.trailingAnchor, constant: 30),
-            
-            rewindButton.centerYAnchor.constraintEqualToAnchor(containerArea.centerYAnchor),
-            playButton.centerYAnchor.constraintEqualToAnchor(containerArea.centerYAnchor),
-            fastfButton.centerYAnchor.constraintEqualToAnchor(containerArea.centerYAnchor)
-        ]
-        
-        NSLayoutConstraint.activateConstraints(containerAreaConstraints)
     }
     
-    func pressedPlay(button: UIButton) {
-        if audioPlayer.player!.playing == false {
-            audioPlayer.play()
-            
-            origImg_play = UIImage(named: "Pause Filled")!
-            
-            print(audioPlayer.player!.duration)
-            
-        } else if audioPlayer.player!.playing == true {
-            audioPlayer.pause()
-            
-            origImg_play = UIImage(named: "Play Filled")!
-            
-            mediaControls_init()
+    func updatePlayButtonImage() {
+        if let player = audioPlayer.player {
+            switch player.playing {
+            case true:
+                // FIXME: figure out circumstances to make the image pause/stop
+                playButton.setImage(UIImage(named: "Pause Filled"), forState: .Normal)
+                print("pause button should be displayed")
+            case false:
+                print("play button should be displayed")
+                playButton.setImage(UIImage(named: "Play Filled"), forState: .Normal)
+            }
         }
     }
     
-    func pressedFastf(button: UIButton) {
+    // MARK: - Media player controls
+    
+    @IBAction func volumeAction(sender: AnyObject) {
+        audioPlayer.volume = volumeOutlet.value
+    }
+    
+    @IBAction func scrubAction(sender: AnyObject) {
+        audioPlayer.player!.currentTime = Double(scrubOutlet.value) * audioPlayer.player!.duration
+    }
+    
+    @IBAction func pressedPlay(sender: UIButton) {
+        if let player = audioPlayer.player {
+            switch player.playing {
+            case true:
+                audioPlayer.player?.pause()
+                updatePlayButtonImage()
+            case false:
+                audioPlayer.player?.play()
+                updatePlayButtonImage()
+            }
+        }
+    }
+    
+    @IBAction func pressedFastf(sender: UIButton) {
         
         self.audioPlayer.nextSong(true)
         
@@ -144,13 +126,10 @@ class MusicPlayerController: UIViewController {
         } else if audioPlayer.player!.playing == true {
             audioPlayer.play()
         }
-        
     }
     
-    func pressedRewind(button: UIButton) {
+    @IBAction func pressedRewind(button: UIButton) {
         audioPlayer.previousSong()
-        
-        //print(songNum)
         
         if audioPlayer.player!.playing == false {
             audioPlayer.pause()
@@ -159,18 +138,11 @@ class MusicPlayerController: UIViewController {
         }
     }
     
-    func someAction(button: UIButton) {
-        print("some action")
-    }
-    
     func updateScrubSlider(){
         scrubOutlet.value = Float(audioPlayer.player!.currentTime/audioPlayer.player!.duration)
         
         if scrubOutlet.value == 1 || scrubOutlet.value == 0 {
-            
-            origImg_play = UIImage(named: "Pause Filled")!
-            mediaControls_init()
-            
+            print("updateScrubSlider either at min or max")
         }
     }
 }
