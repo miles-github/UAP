@@ -73,19 +73,19 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                 player?.play()
-                NSNotificationCenter.defaultCenter().postNotificationName(playNotificationKey, object: self)
             } catch {
                 print(error)
             }
         }
+        NSNotificationCenter.defaultCenter().postNotificationName(playNotificationKey, object: self)
         print("AudioPlayer: playing song at index: \(currentTrackIndex)")
     }
     
     func stop() {
         if player?.playing == true {
             player?.stop()
-            NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
             player?.currentTime = 0
+            NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
         }
         print("AudioPlayer stop() called")
     }
@@ -93,9 +93,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func pause() {
         if player?.playing == true {
             player?.pause()
-            // FIXME: if we want to pause later, change the notification here and add one on MusicPlayerController
             NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
         }
+        // FIXME: if we want to pause later, change the notification here and add one on MusicPlayerController
         print("AudioPlayer pause() called")
     }
     
@@ -226,7 +226,6 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         if currentTrackIndex == tracks.count - 1 {
             print("end of playlist reached")
             player.stop()
-            
             // Posts notification that resets buttons on various view controllers
             // TODO: figure out what notifications need to be posted to update UI, etc.
         }

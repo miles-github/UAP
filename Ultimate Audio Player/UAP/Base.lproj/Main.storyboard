@@ -73,28 +73,28 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adG-Q1-kfB">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adG-Q1-kfB">
                                 <rect key="frame" x="193" y="518" width="214" height="74"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qTw-ZR-5nv">
-                                        <rect key="frame" x="16" y="12" width="182" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qTw-ZR-5nv">
+                                        <rect key="frame" x="16" y="12" width="872" height="490"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7x-XI-pQZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7x-XI-pQZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="490"/>
                                                 <state key="normal" image="Rewind Filled"/>
                                                 <connections>
                                                     <action selector="pressedRewind:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p8T-9i-968"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPQ-Kd-xcI">
-                                                <rect key="frame" x="66" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPQ-Kd-xcI">
+                                                <rect key="frame" x="296" y="0.0" width="280" height="490"/>
                                                 <state key="normal" image="Play Filled"/>
                                                 <connections>
                                                     <action selector="pressedPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sFf-C9-QP8"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-GQ-FKP">
-                                                <rect key="frame" x="132" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-GQ-FKP">
+                                                <rect key="frame" x="592" y="0.0" width="280" height="490"/>
                                                 <state key="normal" image="Fast Forward Filled"/>
                                                 <connections>
                                                     <action selector="pressedFastf:" destination="BYZ-38-t0r" eventType="touchUpInside" id="smV-2U-KPe"/>
