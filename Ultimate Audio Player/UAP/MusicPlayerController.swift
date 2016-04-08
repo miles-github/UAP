@@ -39,6 +39,10 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var fastForwardButton: UIButton!
     
+    // Gesture recognizers
+    let nextSongGesture = UISwipeGestureRecognizer()
+    let priorSongGesture = UISwipeGestureRecognizer()
+    
     // MARK: - View Controller Lifecycle Methods
     
     override func viewDidLoad() {
@@ -61,6 +65,7 @@ class MusicPlayerController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(MusicPlayerController.audioPlayerNotificationHandler(_:)), name: playNotificationKey, object: nil)
         notificationCenter.addObserver(self, selector: #selector(MusicPlayerController.audioPlayerNotificationHandler(_:)), name: stopNotificationKey, object: nil)
         
+        configureGestureRecognizers()
         configureColors()
         
         // Assign tags to buttons to determine which one is the sender
@@ -72,6 +77,19 @@ class MusicPlayerController: UIViewController {
     deinit {
         // Remove notifications
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - Gesture Recognizer Methods
+    func configureGestureRecognizers() {
+        // configure nextSongGesture
+        nextSongGesture.direction = .Left
+        nextSongGesture.addTarget(self, action: #selector(MusicPlayerController.pressedFastf(_:)))
+        view.addGestureRecognizer(nextSongGesture)
+        
+        // configure priorSongGesture
+        priorSongGesture.direction = .Right
+        priorSongGesture.addTarget(self, action: #selector(MusicPlayerController.pressedRewind(_:)))
+        view.addGestureRecognizer(priorSongGesture)
     }
     
     // MARK: - UI Appearance Attribute Configuration
@@ -155,7 +173,7 @@ class MusicPlayerController: UIViewController {
     }
     
     // This method compares two images to see if they're the same thing
-    // updatePlayButtonImage(_:) uses this method to return a bool
+    // updatePlayButtonImage(_:) uses this method to return a Boolean
     func image(currentImage: UIImage, isEqualTo desiredImage: UIImage) -> Bool {
         let currentImageData = UIImagePNGRepresentation(currentImage)
         let desiredImageData = UIImagePNGRepresentation(desiredImage)
@@ -173,7 +191,7 @@ class MusicPlayerController: UIViewController {
         audioPlayer.player!.currentTime = Double(scrubOutlet.value) * audioPlayer.player!.duration
     }
     
-    @IBAction func pressedPlay(sender: UIButton) {
+    @IBAction func pressedPlay(sender: AnyObject) {
         if let player = audioPlayer.player {
             switch player.playing {
             case true:
@@ -185,9 +203,19 @@ class MusicPlayerController: UIViewController {
         }
     }
     
-    @IBAction func pressedFastf(sender: UIButton) {
+    @IBAction func pressedFastf(sender: NSObject) {
         self.audioPlayer.nextSong(true)
-        animator.animateControl(sender)
+        
+        // We do a switch here so it doesn't animate on a swipe gesture
+        switch sender {
+        case nextSongGesture:
+            print("gestureRecognizer sent this")
+        case fastForwardButton as UIButton:
+            print("fastForwardButton sent this")
+            animator.animateControl(sender as! UIControl)
+        default:
+            print("something else sent this")
+        }
         
         if audioPlayer.player!.playing == false {
             audioPlayer.pause()
@@ -195,10 +223,19 @@ class MusicPlayerController: UIViewController {
             audioPlayer.play()
         }
     }
-        
-    @IBAction func pressedRewind(sender: UIButton) {
+    
+    @IBAction func pressedRewind(sender: NSObject) {
         audioPlayer.previousSong()
-        animator.animateControl(sender)
+        
+        // We do a switch here so it doesn't animate on a swipe gesture
+        switch sender {
+        case priorSongGesture:
+            print("gestureRecognizer sent this")
+        case rewindButton:
+            animator.animateControl(sender as! UIControl)
+        default:
+            print("something else sent this")
+        }
         
         if audioPlayer.player!.playing == false {
             audioPlayer.pause()
