@@ -8,12 +8,20 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     /* The player property will be an instance of the AVAudioPlayer class,
      which we will use to play, pause, and stop the MP3s. */
     var player: AVAudioPlayer?
+    
+    var playerItem: AVPlayerItem?
+    
+    // These variables are set by play()
+    var currentTrackSongName: String?
+    var currentTrackArtistName: String?
+    var currentTrackArtwork: UIImage?
     
     /*
      Get system volume
@@ -29,6 +37,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
     override init() {
         super.init()
+
     }
 
     // this is the initializer for a playlist
@@ -58,6 +67,35 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         
         let url = NSURL.fileURLWithPath(tracks[currentTrackIndex] as String)
         
+        let playerItem = AVPlayerItem(URL: url)
+        let metadataList = playerItem.asset.metadata as [AVMetadataItem]
+        
+        for item in metadataList {
+            if let stringValue = item.value {
+                if item.commonKey == "title" {
+                    currentTrackSongName = stringValue as? String
+                    print("AudioPlayer song title set")
+                } else {
+                    currentTrackSongName = nil
+                }
+                if item.commonKey == "artist" {
+                    currentTrackArtistName = stringValue as? String
+                    print("AudioPlayer artist name set")
+                } else {
+                    currentTrackArtistName = nil
+                }
+                
+                if item.commonKey == "artwork" {
+                    if let audioImage = UIImage(data: item.value as! NSData) {
+                        currentTrackArtwork = audioImage
+                        print("AudioPlayer artwork set")
+                    } else {
+                        currentTrackArtwork = UIImage(named: "RickAstley")
+                    }
+                }
+            }
+        }
+        
         do {
             player = try AVAudioPlayer(contentsOfURL: url) // Thread 1: breakpoint 1.1
             player?.delegate = self
@@ -69,6 +107,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func play() {
+        
         if player?.playing == false {
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
@@ -91,9 +130,11 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func pause() {
+        
         if player?.playing == true {
             player?.pause()
             NSNotificationCenter.defaultCenter().postNotificationName(stopNotificationKey, object: self)
+            
         }
         // FIXME: if we want to pause later, change the notification here and add one on MusicPlayerController
         print("AudioPlayer pause() called")
@@ -103,6 +144,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         var playerWasPlaying = false
         if player?.playing == true {
             player?.stop()
+            
             playerWasPlaying = true
         }
         
@@ -234,5 +276,11 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             print("advance to next track")
             nextSong(true)
         }
+    }
+    
+    // MARK: - MetaData methods
+    func songTitle() -> String {
+        
+        return "Label returned from AudioPlayerClass"
     }
 }

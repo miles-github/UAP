@@ -12,6 +12,7 @@
 		34B6EB601CB37C4D00213BAF /* Battle at the misty valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */; };
 		34B6EB611CB37C4D00213BAF /* Twilight Poem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */; };
 		34B6EB631CB37CD800213BAF /* Classical-bwv-bach.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */; };
+		55EFDB191CC5AEC800BC4DF1 /* PreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EFDB181CC5AEC800BC4DF1 /* PreferencesTableViewController.swift */; };
 		55F9F5A31CB4298A0008E859 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9F5A21CB4298A0008E859 /* AudioPlayer.swift */; };
 		55F9F5A71CB536EC0008E859 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9F5A61CB536EC0008E859 /* Animator.swift */; };
 		7E6E49475C073EBE54336847 /* Pods_UAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E0C704EFFD633F704DBA08 /* Pods_UAPUITests.framework */; };
@@ -49,6 +50,7 @@
 		34B6EB5E1CB37C4D00213BAF /* Battle at the misty valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Battle at the misty valley.mp3"; sourceTree = "<group>"; };
 		34B6EB5F1CB37C4D00213BAF /* Twilight Poem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Twilight Poem.mp3"; sourceTree = "<group>"; };
 		34B6EB621CB37CD800213BAF /* Classical-bwv-bach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Classical-bwv-bach.mp3"; sourceTree = "<group>"; };
+		55EFDB181CC5AEC800BC4DF1 /* PreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewController.swift; sourceTree = "<group>"; };
 		55F9F5A21CB4298A0008E859 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		55F9F5A61CB536EC0008E859 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		690EE7E09B32C649F9D80E54 /* Pods_UAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				34B6EB5A1CB3630600213BAF /* MusicPlayerController.swift */,
+				55EFDB181CC5AEC800BC4DF1 /* PreferencesTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 			files = (
 				55F9F5A71CB536EC0008E859 /* Animator.swift in Sources */,
 				34B6EB5B1CB3630600213BAF /* MusicPlayerController.swift in Sources */,
+				55EFDB191CC5AEC800BC4DF1 /* PreferencesTableViewController.swift in Sources */,
 				EF117C601CB33C2F0020B156 /* AppDelegate.swift in Sources */,
 				55F9F5A31CB4298A0008E859 /* AudioPlayer.swift in Sources */,
 			);

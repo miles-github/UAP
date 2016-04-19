@@ -27,8 +27,13 @@ class MusicPlayerController: UIViewController {
      */
     
     // Media Controls background view
-    @IBOutlet weak var audioControlsContainer: UIView!
     @IBOutlet weak var audioControlsStackView: UIStackView! // this is tucked in the audioControlsContainer view
+    
+    // Metadata-driven UI elements
+    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var songLabel: UILabel!
+    @IBOutlet weak var songImage: UIImageView!
+    
     
     // Temporary Scrubber and Volume Control
     @IBOutlet var volumeOutlet: UISlider!
@@ -95,10 +100,11 @@ class MusicPlayerController: UIViewController {
     // MARK: - UI Appearance Attribute Configuration
     
     func configureColors() {
-        audioControlsContainer.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-        audioControlsContainer.layer.borderWidth = 2
-        audioControlsContainer.layer.cornerRadius = 10.0
-        audioControlsContainer.layer.borderColor = UIColor.lightGrayColor().CGColor
+        // FIXME: update this after metadata fills in
+//        audioControlsContainer.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+//        audioControlsContainer.layer.borderWidth = 2
+//        audioControlsContainer.layer.cornerRadius = 10.0
+//        audioControlsContainer.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         //Tint buttons
         /*
@@ -114,7 +120,38 @@ class MusicPlayerController: UIViewController {
     func audioPlayerNotificationHandler(notification: NSNotification) {
         print("Notification received from \(notification.name)")
         updatePlayButtonImage(self)
+        updateSongMetaData()
     }
+    
+    func updateSongMetaData() {
+//        // TODO: make this a little more exciting
+//        artistLabel.text = audioPlayer.currentTrackArtistName
+//        songLabel.text = audioPlayer.currentTrackSongName
+//        songImage.image = audioPlayer.currentTrackArtwork
+
+        print("UPDATE SONG META DATA CALLED")
+        
+        if audioPlayer.currentTrackArtistName == nil {
+            artistLabel.text = ""
+        } else {
+            artistLabel.text = audioPlayer.currentTrackArtistName
+        }
+        
+        if audioPlayer.currentTrackSongName == nil {
+            songLabel.text = ""
+        } else {
+            songLabel.text = audioPlayer.currentTrackSongName
+        }
+        
+        if audioPlayer.currentTrackArtwork == nil {
+            songImage.image = UIImage(named: "RickAstley")
+        } else {
+            songImage.image = audioPlayer.currentTrackArtwork
+        }
+        
+    }
+    
+    
     
     func updatePlayButtonImage(sender: AnyObject) {
         if let player = audioPlayer.player {
@@ -192,6 +229,7 @@ class MusicPlayerController: UIViewController {
     }
     
     @IBAction func pressedPlay(sender: AnyObject) {
+        updateSongMetaData()
         if let player = audioPlayer.player {
             switch player.playing {
             case true:
@@ -244,6 +282,7 @@ class MusicPlayerController: UIViewController {
         }
     }
     
+    // TODO: broke this somewhere. Control functionality works, but doesn't update when media item is playing
     func updateScrubSlider(){
         scrubOutlet.value = Float(audioPlayer.player!.currentTime/audioPlayer.player!.duration)
         

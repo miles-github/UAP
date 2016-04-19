@@ -35,4 +35,20 @@ class Animator: NSObject {
             // in this instance, the animation is UI candy
         }
     }
+    
+    func animateLabel(view: UIView, duration: Double) -> Void {
+        view.transform = CGAffineTransformMakeScale(1.25, 1.25)
+        UIView.animateWithDuration(duration,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.3,
+                                   initialSpringVelocity: 5.0,
+                                   options: UIViewAnimationOptions.AllowUserInteraction,
+                                   animations: {
+                                    view.transform = CGAffineTransformIdentity
+        }) { (value: Bool) -> Void in
+            // completion block
+            // in this instance, the animation is UI candy
+        }
+
+    }
 }
